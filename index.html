@@ -3,24 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temporizador - Mesas de Billar</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fuente Orbitron para darle estilo gamer -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <title>Temporizador de Mesas de Billar</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Control de Mesas de Billar</h1>
-        
-        <div id="control-mesas">
-            <button class="gamer-button" onclick="agregarMesa()">Agregar Mesa</button>
-            <button class="gamer-button" onclick="eliminarMesa()">Eliminar Mesa</button>
-        </div>
+    <h1>Temporizador de Mesas de Billar</h1>
+    
+    <!-- Contenedor de las mesas -->
+    <div id="mesas-container"></div>
 
-        <div id="mesas-container"></div>
-    </div>
+    <!-- Botones para agregar y eliminar mesas -->
+    <button id="agregar-mesa">Agregar Mesa</button>
+    <button id="eliminar-mesa">Eliminar Mesa</button>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="client.js"></script>
+    <!-- Archivo JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
