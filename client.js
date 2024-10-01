@@ -1,8 +1,8 @@
-const socket = io();
+const socket = io();  // Establece la conexión con el servidor
 
 const mesasContainer = document.getElementById('mesas-container');
 
-// Función para formatear el tiempo de segundos a hh:mm:ss
+// Formatear el tiempo en horas, minutos y segundos
 const formatearTiempo = (segundosTotales) => {
     const horas = Math.floor(segundosTotales / 3600);
     const minutos = Math.floor((segundosTotales % 3600) / 60);
@@ -15,7 +15,7 @@ const formatearTiempo = (segundosTotales) => {
     return `${horasFormateadas}:${minutosFormateados}:${segundosFormateados}`;
 };
 
-// Función para crear la interfaz de una mesa
+// Crear la interfaz de una mesa
 const crearMesaHTML = (mesa, tiempo) => {
     return `
         <div class="mesa" id="${mesa}">
@@ -28,30 +28,29 @@ const crearMesaHTML = (mesa, tiempo) => {
     `;
 };
 
-// Función para actualizar la interfaz con los tiempos de las mesas
+// Actualizar la interfaz cuando el servidor envía tiempos de las mesas
 socket.on('actualizarTiempos', (mesas) => {
-    mesasContainer.innerHTML = '';  // Limpiamos el contenedor antes de actualizar
+    mesasContainer.innerHTML = '';  // Limpiar el contenedor antes de actualizar
     for (let mesa in mesas) {
         mesasContainer.innerHTML += crearMesaHTML(mesa, mesas[mesa].tiempo);
     }
 });
 
-// Función para enviar el cambio de estado de una mesa al servidor
+// Enviar cambios de estado de una mesa al servidor
 const cambiarEstadoMesa = (mesa, accion) => {
     socket.emit('cambiarEstadoMesa', { mesa, accion });
 };
 
-// Función para agregar una nueva mesa
+// Funciones para agregar o eliminar mesas
 const agregarMesa = () => {
     socket.emit('agregarMesa');
 };
 
-// Función para eliminar la última mesa
 const eliminarMesa = () => {
     socket.emit('eliminarMesa');
 };
 
-// Función para restablecer el estado al recargar la página
+// Restablecer el estado cuando se recarga la página
 window.onbeforeunload = function() {
     socket.emit('recargarPagina');
 };
